@@ -1,5 +1,7 @@
 const express = require('express');
 
+require('express-async-errors');
+
 require('./config/db');
 
 const app = express();
@@ -13,6 +15,11 @@ app.get('/', (req, res) => {
 app.use(express.json());
 
 app.use(router);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).send({error: 'Ocorreu um erro!'});
+});
 
 app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000');
