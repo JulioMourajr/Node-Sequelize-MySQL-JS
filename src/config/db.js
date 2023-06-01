@@ -2,15 +2,19 @@ const sequelize = require('./sequelize')
 
 // Models
 
-const officesModel = require('./officesModel');
-const employeesModel = require('./employeesModel');
+const officesModel = require('../models/officesModel');
+const employeesModel = require('../models/employeesModel');
 
 // Relatioships
 
-officesModel.hasMany(employeesModel, {foreignKey: 'officeCode', onDelete: 'NO ACTION', onUpdate: 'CASCADE'});
+// employees has many employees
 
-employeesModel.belongsTo(officesModel, {foreignKey: 'officeCode'});
+employeesModel.hasMany(employeesModel, {foreignKey: 'reportsTo', onDelete: 'NO ACTION', onUpdate: 'NO ACTION'});
+employeesModel.belongsTo(employeesModel, {foreignKey: 'reportsTo', onDelete: 'NO ACTION', onUpdate: 'NO ACTION'});
 
+// offices has many employees
+officesModel.hasMany(employeesModel, {foreignKey: 'officeCode', onDelete: 'NO ACTION', onUpdate: 'NO ACTION'});
+employeesModel.belongsTo(officesModel, {foreignKey: 'officeCode', onDelete: 'NO ACTION', onUpdate: 'NO ACTION'});
 
 
 sequelize.sync({alter: process.env.NODE_ENV === 'production' ? false : true});
