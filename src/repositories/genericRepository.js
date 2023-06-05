@@ -1,13 +1,15 @@
 class GenericRepository {
-  constructor(model) {
+  constructor(id, model) {
+    this.id = id;
     this.model = model;
+
   }
-  async getAll() {
+  getAll = async () => {
     const result = await this.model.findAll();
     return result;
   }
 
-  async getById(id) {
+  getById = async (id) =>{
     const result = await this.model.findByPk(id);
 
     if(!result) {
@@ -16,25 +18,25 @@ class GenericRepository {
     return result;
   }
 
-  async create(entity) {
+  create = async (entity) => {
     const newEntity = await this.model.create(entity);
     return newEntity;
   }
 
-  async update(id, entity) {
+  update = async (id, entity) => {
    await this.model.update(entity, {
      where: {
-       id: id
+       [this.id]: id
      }
    });
-   return await this.model.getById(id); 
+   return await this.getById(id); 
   }
 
-  async delete(id) {
+  delete = async (id) => {
     await this.getById(id);
     await this.model.destroy({
       where: {
-        id: id
+        [this.id]: id
       }
     })
   }
