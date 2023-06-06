@@ -7,7 +7,7 @@ const paymentsModel = sequelize.define('payments', {
     type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
-
+    autoIncrement: true
   },
   checkNumber: {
     type: DataTypes.STRING(50),

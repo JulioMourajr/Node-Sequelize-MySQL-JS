@@ -21,6 +21,6 @@ app.use((err, req, res, next) => {
   res.status(500).send({error: err.message});
 });
 
-app.listen(3000, () => {
+/*app.listen(3000, () => {
   console.log('Servidor rodando na porta 3000');
-})
+})*/
