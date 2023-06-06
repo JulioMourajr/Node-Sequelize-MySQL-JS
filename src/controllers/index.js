@@ -1,5 +1,7 @@
 const GenericController  = require('./genericController');
 
+const EmployeesController = require('./employeesController');
+
 const {
   officesRepository,
   employeesRepository,
@@ -8,7 +10,7 @@ const {
 
 
 const officesController = new GenericController(officesRepository);
-const employeesController = new GenericController(employeesRepository);
+const employeesController = new EmployeesController(employeesRepository);
 const customersController = new GenericController(customersRepository);
 
 module.exports = {

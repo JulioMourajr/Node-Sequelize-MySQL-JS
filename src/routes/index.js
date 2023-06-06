@@ -3,14 +3,14 @@ const router = express.Router();
 
 const genericRoute = require('./genericRoute');
 
+
 const {
   officesController,
-  employeesController,
   customersController
 } = require('../controllers');
 
 const officesRouter = genericRoute(officesController);
-const employeesRouter = genericRoute(employeesController);
+const employeesRouter = require('./employeesRoute')
 const customersRouter = genericRoute(customersController);
 
 router.use('/offices', officesRouter);
